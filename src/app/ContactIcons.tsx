@@ -1,0 +1,101 @@
+'use client';
+
+import { useState } from "react";
+
+// Interactive contact icons for the profile sidebar. Two icons do something:
+//  - "Send Message" opens a chooser that forces a specific mail provider's
+//    pre-filled compose window (Gmail / Outlook web), plus a default-mail-app
+//    option (mailto:) which covers Apple Mail / Outlook desktop / etc.
+//  - "Forward to a Friend" opens the native share sheet on mobile via the Web
+//    Share API, falling back to copying the page link where it's unsupported.
+const TO = "rc@payabli.com";
+const SUBJECT = "Hello from your site";
+const BODY = "Hi RC,\n\n";
+
+function openCompose(provider: "gmail" | "outlook" | "default") {
+  const su = encodeURIComponent(SUBJECT);
+  const body = encodeURIComponent(BODY);
+  if (provider === "gmail") {
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${TO}&su=${su}&body=${body}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  } else if (provider === "outlook") {
+    window.open(
+      `https://outlook.office.com/mail/deeplink/compose?to=${TO}&subject=${su}&body=${body}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  } else {
+    window.location.href = `mailto:${TO}?subject=${su}&body=${body}`;
+  }
+}
+
+async function forwardToFriend() {
+  const shareData = {
+    title: document.title,
+    text: "Check out RC's page",
+    url: window.location.href,
+  };
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch {
+      // User cancelled the share sheet — nothing to do.
+    }
+    return;
+  }
+  // Desktop / unsupported: copy the link instead.
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    alert("Link copied to clipboard.");
+  } catch {
+    alert(window.location.href);
+  }
+}
+
+export default function ContactIcons() {
+  const [mailMenuOpen, setMailMenuOpen] = useState(false);
+
+  return (
+    <figure className="contact-images">
+      <span className="contact-icon-wrap">
+        <img
+          src="/pictures/sendMailIcon.gif"
+          alt="Send Message"
+          role="button"
+          tabIndex={0}
+          onClick={() => setMailMenuOpen((o) => !o)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") setMailMenuOpen((o) => !o);
+          }}
+        />
+        {mailMenuOpen && (
+          <span className="mail-menu">
+            <button type="button" onClick={() => { openCompose("gmail"); setMailMenuOpen(false); }}>Gmail</button>
+            <button type="button" onClick={() => { openCompose("outlook"); setMailMenuOpen(false); }}>Outlook</button>
+            <button type="button" onClick={() => { openCompose("default"); setMailMenuOpen(false); }}>Default mail app</button>
+          </span>
+        )}
+      </span>
+
+      <img
+        src="/pictures/forwardMailIcon.gif"
+        alt="Forward to Friend"
+        role="button"
+        tabIndex={0}
+        onClick={forwardToFriend}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") forwardToFriend();
+        }}
+      />
+      <img src="/pictures/addFriendIcon.gif" alt="Add to Friends" />
+      <img src="/pictures/addFavoritesIcon.gif" alt="Add to Favorites" />
+      <img src="/pictures/messagefriend.gif" alt="Instant Message" />
+      <img src="/pictures/blockUser.gif" alt="Block User" />
+      <img src="/pictures/addToGroupIcon.gif" alt="Add to Group" />
+      <img src="/pictures/rankUserIcon.gif" alt="Rank User" />
+    </figure>
+  );
+}
