@@ -51,8 +51,8 @@ export default function Home() {
           </figure>
 
           <figure>
-            <figcaption><a href="#">Andi</a></figcaption>
-            <img src="/pictures/andi.jpg" />
+            <figcaption><a href="#">xX_Ļ£Ah_Xx</a></figcaption>
+            <img src="/pictures/leah.png" alt="leah" />
           </figure>
 
           <figure>
