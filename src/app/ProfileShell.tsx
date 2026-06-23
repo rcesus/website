@@ -15,8 +15,7 @@ export default function ProfileShell({ children }: { children: React.ReactNode }
       <header className="main-header">
         <nav className="search-bar">
 
-          {/* Search bar is intentionally non-functional for now: the input
-              and button are disabled so the chrome reads correctly without
+          {/* the input and button are disabled so the chrome reads correctly without
               implying a working search. */}
           <form>
             <input type="text" name="search" placeholder="Search" disabled />
@@ -189,7 +188,7 @@ export default function ProfileShell({ children }: { children: React.ReactNode }
                       <li>Manchester, New Hampshire</li>
                       <li>Graduated: <a href="#">2026</a></li>
                       <li>Degree: Master&apos;s Degree</li>
-                      <li>Major: Buisness Administration</li>
+                      <li>Major: Business Administration</li>
                     </ul>
                   </th>
                   <td className="sidebar-table-data">2024 to 2026</td>
