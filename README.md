@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# rccowie.com
 
-## Getting Started
+A MySpace-style personal profile site built with Next.js. It's 2006 in your browser.
 
-First, run the development server:
+Live at **[www.rccowie.com](https://www.rccowie.com)**
+
+---
+
+## What it is
+
+A personal website that recreates the look and feel of a classic MySpace profile — fixed 800px width, blue chrome, table-based sidebar layout, animated GIF contact buttons, and all. Under the hood it's a modern Next.js 16 app with TypeScript and Tailwind CSS 4.
+
+Features:
+- **Profile page** — "RC is in your extended network", bio, friends grid, latest posts
+- **Blog** — Markdown-based posts with YAML front matter, statically generated, sorted newest-first
+- **Music player** — Web Audio API visualizer, auto-loads MP3s from `/public/music`, collapsible playlist
+- **Contact** — Multi-provider email compose (Gmail, Outlook, or default mail app), Web Share API for "Forward to a Friend"
+
+---
+
+## Stack
+
+- [Next.js 16](https://nextjs.org) (App Router)
+- [React 19](https://react.dev)
+- [TypeScript 5](https://www.typescriptlang.org)
+- [Tailwind CSS 4](https://tailwindcss.com)
+- [gray-matter](https://github.com/jonschlinkert/gray-matter) + [marked](https://github.com/markedjs/marked) for blog content
+
+---
+
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Blog posts
 
-## Learn More
+Posts live in `/content/posts/` as Markdown files with front matter:
 
-To learn more about Next.js, take a look at the following resources:
+```md
+---
+title: Post Title
+date: 2026-01-01
+excerpt: Short description.
+category: Music
+tags: [blink-182, pop-punk]
+draft: false
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Post content here.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Set `draft: true` to exclude a post from the build.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Music player
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Drop MP3 files into `/public/music/` named `Artist - Title.mp3`. Cover art should be `Artist - Title.jpg` (or any `Artist - *.jpg` as a fallback) in the same folder. The player builds the playlist automatically at runtime.
+
+---
+
+## Inspiration
+
+- **Blog layout**: [ketoverlock/yourspace](https://github.com/ketoverlock/yourspace)
+- **MySpace framework/structure**: [wittenbrock/toms-myspace-page](https://github.com/wittenbrock/toms-myspace-page)
+
+---
+
+## Deployed on
+
+[Vercel](https://vercel.com)
