@@ -34,7 +34,7 @@ export default function Home() {
         <p>Outside of work I&apos;m a lifelong Philly sports masochist (Go Birds), a pop-punk/emo kid who never fully grew out of it, and a Star Trek lifer.</p>
 
         <h3>Who I&apos;d like to meet:</h3>
-        <p>People who can hold a conversation about a great record and a bad bullpen decision in the same breath. Bonus points if you&apos;ve seen a band in a basement before they got big.</p>
+        <p>People who can hold a conversation about a great album and a bad bullpen decision in the same breath. Bonus points if you&apos;ve seen a band in a basement before they got big.</p>
       </section>
 
       <section className="friends">
