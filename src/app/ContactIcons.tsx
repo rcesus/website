@@ -32,6 +32,14 @@ function openCompose(provider: "gmail" | "outlook" | "default") {
   }
 }
 
+function addToFavorites() {
+  // No current browser lets a page add a bookmark via JS, so we just tell the
+  // user the right keyboard shortcut for their OS.
+  const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
+  const shortcut = isMac ? "⌘ + D" : "Ctrl + D";
+  alert(`Press ${shortcut} to bookmark this page.`);
+}
+
 async function forwardToFriend() {
   const shareData = {
     title: document.title,
@@ -91,7 +99,16 @@ export default function ContactIcons() {
         }}
       />
       <img src="/pictures/addFriendIcon.gif" alt="Add to Friends" />
-      <img src="/pictures/addFavoritesIcon.gif" alt="Add to Favorites" />
+      <img
+        src="/pictures/addFavoritesIcon.gif"
+        alt="Add to Favorites"
+        role="button"
+        tabIndex={0}
+        onClick={addToFavorites}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") addToFavorites();
+        }}
+      />
       <img src="/pictures/messagefriend.gif" alt="Instant Message" />
       <img src="/pictures/blockUser.gif" alt="Block User" />
       <img src="/pictures/addToGroupIcon.gif" alt="Add to Group" />
