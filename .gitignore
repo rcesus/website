@@ -44,6 +44,5 @@ yarn-error.log*
 next-env.d.ts
 
 # Personal content (see SETUP.md for how to add your own)
-/content/posts/
 /public/music/
 /public/pictures/
