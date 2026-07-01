@@ -89,6 +89,15 @@ export default function BlogEditor({ initialData, initialSlug, onSave, onCancel 
     }
   };
 
+  const sanitizeSlug = (input: string): string => {
+    return input
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  };
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!slug.trim()) {
@@ -101,14 +110,20 @@ export default function BlogEditor({ initialData, initialSlug, onSave, onCancel 
     }
     setSaving(true);
     try {
+      const sanitizedSlug = sanitizeSlug(slug);
       await onSave(
         {
           ...data,
           tags: tagsInput.split(',').map(t => t.trim()).filter(Boolean),
         },
-        slug
+        sanitizedSlug
       );
-      setMessage('✓ Post saved!');
+      if (sanitizedSlug !== slug) {
+        setSlug(sanitizedSlug);
+        setMessage(`✓ Post saved! (slug modified: "${sanitizedSlug}")`);
+      } else {
+        setMessage('✓ Post saved!');
+      }
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       setMessage(`✗ Error: ${error instanceof Error ? error.message : 'Unknown error'}`);

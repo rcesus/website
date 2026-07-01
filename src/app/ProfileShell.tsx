@@ -172,18 +172,6 @@ export default async function ProfileShell({ children }: { children: React.React
             </table>
           </section>
 
-          {/* About Me Section */}
-          <section className="about-me">
-            <h2 className="sidebar-table-h2">About Me</h2>
-            <p>Sales engineer by day, which is a fancy way of saying I get paid to demo software and explain why the API does that, actually, on purpose. Somehow turned "being the person who reads the docs" into a career and a personality. Outside of work I&apos;m a pop-punk/emo kid who never fully grew out of it, spending as much time as I can with my kids, enjoying rural Pennsylvania scenery, and treating myself to an occasional Diet Dr Pepper.</p>
-          </section>
-
-          {/* Who I'd Like to Meet Section */}
-          <section className="who-to-meet">
-            <h2 className="sidebar-table-h2">Who I&apos;d Like to Meet</h2>
-            <p>People who are similarly deep in the weeds on AI and how it&apos;s actually changing solutions engineering, not just people posting "AI will change everything" with a stock photo of a robot handshake. Bonus points if you think Bret "Hitman" Hart is right about how wrestling should be booked and who deserved the belt, because so do I and I will not be debating this.</p>
-          </section>
-
           {/* RC's Schools Section */}
           <section className="schools">
             <table className="sidebar-table">

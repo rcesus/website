@@ -28,7 +28,7 @@ export async function setCSRFToken(token: string): Promise<void> {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
     maxAge: 60 * 60, // 1 hour
-    path: '/admin',
+    path: '/',
   });
 }
 

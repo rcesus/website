@@ -1,28 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useArticleMode } from '../ArticleModeProvider';
 
 interface BlogPostToggleProps {
   children: React.ReactNode;
 }
 
 export default function BlogPostToggle({ children }: BlogPostToggleProps) {
-  const [articleMode, setArticleMode] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const { articleMode, toggleMode } = useArticleMode();
 
   useEffect(() => {
-    const saved = localStorage.getItem('blog-article-mode') === 'true';
-    setArticleMode(saved);
-    setMounted(true);
-
-    // Apply article mode to document element
-    if (saved) {
-      document.documentElement.setAttribute('data-blog-article-mode', 'true');
-    }
-  }, []);
-
-  useEffect(() => {
-    // Update document element whenever article mode changes
     if (articleMode) {
       document.documentElement.setAttribute('data-blog-article-mode', 'true');
     } else {
@@ -30,15 +18,11 @@ export default function BlogPostToggle({ children }: BlogPostToggleProps) {
     }
   }, [articleMode]);
 
-  const toggleMode = () => {
-    const newMode = !articleMode;
-    setArticleMode(newMode);
-    localStorage.setItem('blog-article-mode', String(newMode));
-  };
-
-  const currentYear = new Date().getFullYear();
-
-  if (!mounted) return <>{children}</>;
+  useEffect(() => {
+    return () => {
+      document.documentElement.removeAttribute('data-blog-article-mode');
+    };
+  }, []);
 
   return (
     <div className="blog-post-container">
@@ -47,9 +31,9 @@ export default function BlogPostToggle({ children }: BlogPostToggleProps) {
         className="article-mode-toggle"
         title="Toggle article mode"
       >
-        {currentYear} Mode
+        {articleMode ? 'MySpace Mode' : '2026 Mode'}
       </button>
-      <div data-article-mode={articleMode}>{children}</div>
+      {children}
     </div>
   );
 }

@@ -29,12 +29,10 @@ export default function Home() {
         </header>
 
         <h3>About me:</h3>
-        <p>Sales engineer by day, which is a fancy way of saying I get paid to demo software and explain why the API does that. Somehow turned &quot;being the person who reads the docs&quot; into a career.</p>
-
-        <p>Outside of work I&apos;m a lifelong Philly sports masochist (Go Birds), a pop-punk/emo kid who never fully grew out of it, and a Star Trek lifer.</p>
+        <p>Sales engineer by day, which is a fancy way of saying I get paid to demo software and explain why the API does that, actually, on purpose. Somehow turned &quot;being the person who reads the docs&quot; into a career and a personality. Outside of work I&apos;m a pop-punk/emo kid who never fully grew out of it, spending as much time as I can with my kids, enjoying rural Pennsylvania scenery, and treating myself to an occasional Diet Dr Pepper.</p>
 
         <h3>Who I&apos;d like to meet:</h3>
-        <p>People who can hold a conversation about a great album and a bad bullpen decision in the same breath. Bonus points if you&apos;ve seen a band in a basement before they got big.</p>
+        <p>People who are similarly deep in the weeds on AI and how it&apos;s actually changing solutions engineering, not just people posting &quot;AI will change everything&quot; with a stock photo of a robot handshake. Bonus points if you think Bret &quot;Hitman&quot; Hart is right about how wrestling should be booked and who deserved the belt, because so do I and I will not be debating this.</p>
       </section>
 
       <section className="friends">
