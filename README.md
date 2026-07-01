@@ -12,9 +12,9 @@ A personal website that recreates the look and feel of a classic MySpace profile
 
 Features:
 - **Profile page** — "RC is in your extended network", bio, interests, details
-- **Blog** — Markdown-based posts with YAML front matter, create/edit via admin dashboard
+- **Blog** — Markdown-based posts with YAML front matter, auto-sanitized slugs
+- **2026 Mode toggle** — Switch between default and article-style rendering on blog posts
 - **Music player** — Auto-loads MP3s from `/public/music`, collapsible playlist
-- **Admin dashboard** — Password-protected editor to manage blog posts
 - **Contact** — Links to email, social media, and messaging platforms
 
 ---
@@ -81,7 +81,7 @@ Post content here.
 
 Set `draft: true` to exclude a post from publishing.
 
-**Via admin dashboard:** Visit `/admin/editor` to create, edit, and manage posts without touching files.
+**Slugs are auto-sanitized:** Spaces become hyphens, special characters are removed, and text is lowercased. A post titled "Test Slug With Spaces & Special!" becomes `test-slug-with-spaces-special`.
 
 ### Music Playlist
 
@@ -152,25 +152,7 @@ Your site is now live at `your-project.vercel.app`
 
 ---
 
-## Admin Dashboard
-
-Access at `/admin/editor` (login required)
-
-Features:
-- View all published posts
-- Create new posts
-- Edit existing posts
-- Password-protected with CSRF tokens
-- Rate limited (5 attempts per 15 minutes)
-
----
-
 ## Troubleshooting
-
-**Can't log in?**
-- Verify `.env.local` has `ADMIN_PASSWORD` set
-- Restart dev server after changing `.env.local`
-- Check caps lock on password
 
 **Music player not showing songs?**
 - Ensure MP3s are in `public/music/` with pattern `Artist - Title.mp3`
