@@ -820,6 +820,7 @@ Blurbs
   padding-top: 3px;
   padding-bottom: 3px;
   margin-bottom: 8px;
+  margin-right: 15px;
 }
 
 .main-section-h2 {
@@ -1389,6 +1390,61 @@ Render inside the right `main` column, matching the MySpace section style.
   line-height: 1.4;
 }
 
+.blog-tags-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #ccc;
+}
+
+.tag-filter-btn {
+  display: inline-block;
+  padding: 3px 8px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333;
+  text-decoration: none;
+  font-size: 8pt;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.tag-filter-btn:hover {
+  background: #e0e0e0;
+}
+
+.tag-filter-btn.active {
+  background: #FF6600;
+  color: #fff;
+  border-color: #FF6600;
+}
+
+.blog-post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 6px 0 0;
+}
+
+.blog-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #666;
+  text-decoration: none;
+  font-size: 7pt;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.blog-tag:hover {
+  background: #e8e8e8;
+  color: #333;
+}
+
 .blog-nav {
   display: flex;
   justify-content: space-between;
@@ -1499,4 +1555,533 @@ Render inside the right `main` column, matching the MySpace section style.
 .blog-post-body .post-button:hover {
   background: #FF6600;
   color: #ffffff;
+}
+
+/*
+========================================
+Article Mode Toggle
+========================================
+*/
+.article-mode-toggle {
+  display: block;
+  margin: 8px 15px 12px;
+  padding: 6px 14px;
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  font-weight: bold;
+  font-size: 9pt;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.article-mode-toggle:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.article-mode-toggle:active {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+/* Article mode styling */
+[data-article-mode="true"] .blog-post-body {
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 10pt;
+  line-height: 1.7;
+}
+
+[data-article-mode="true"] .blog-post-body h2 {
+  font-size: 14pt;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+[data-article-mode="true"] .blog-post-body h3 {
+  font-size: 11pt;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+[data-article-mode="true"] .blog-post-body p {
+  margin-bottom: 14px;
+}
+
+[data-article-mode="true"] .blog-post-body ul,
+[data-article-mode="true"] .blog-post-body ol {
+  margin-bottom: 14px;
+  padding-left: 28px;
+}
+
+[data-article-mode="true"] .blog-post-body li {
+  margin-bottom: 6px;
+}
+
+[data-article-mode="true"] .blog-post-body .post-quote {
+  margin: 18px 0;
+  padding: 12px 16px;
+  border-left: 5px solid #FF6600;
+  background: #fff6ee;
+}
+
+[data-article-mode="true"] .blog-post-body .post-figure {
+  margin: 16px 0;
+}
+
+[data-article-mode="true"] .blog-meta {
+  margin: 0 0 16px 0;
+  font-size: 9pt;
+  text-align: center;
+}
+
+/* Hide sidebar in article mode */
+[data-blog-article-mode="true"] .profile-sidebar {
+  display: none;
+}
+
+[data-blog-article-mode="true"] .page-content-container {
+  display: flex;
+  justify-content: center;
+}
+
+[data-blog-article-mode="true"] main {
+  width: 100%;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+/* Article mode - center title and button */
+[data-blog-article-mode="true"] .main-section-header {
+  text-align: center;
+}
+
+[data-blog-article-mode="true"] .article-mode-toggle {
+  display: block;
+  margin: 24px auto 32px;
+}
+
+[data-blog-article-mode="true"] .blog-post-body {
+  margin-bottom: 48px;
+}
+
+[data-blog-article-mode="true"] .blog-nav {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/*
+========================================
+Admin Pages
+========================================
+*/
+.admin-section {
+  margin-top: 13px;
+}
+
+.admin-container {
+  margin: 15px;
+}
+
+.admin-nav {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 16px 15px;
+}
+
+.admin-nav span {
+  white-space: nowrap;
+}
+
+.admin-loading {
+  padding: 20px 15px;
+  font-size: 10pt;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logout-btn {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 4px 12px;
+  font-size: 9pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+/*
+========================================
+Forms
+========================================
+*/
+.admin-login-form,
+.blog-editor-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 9pt;
+  font-weight: bold;
+  margin-bottom: 3px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 9pt;
+  border-radius: 2px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #FF6600;
+  box-shadow: 0 0 3px rgba(255, 102, 0, 0.3);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.editor-section {
+  margin-bottom: 20px;
+}
+
+.editor-section h3 {
+  font-size: 10pt;
+  font-weight: bold;
+  margin: 0 0 12px;
+  color: #333;
+}
+
+.editor-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.editor-toolbar button,
+.file-upload-btn {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 6px 12px;
+  font-size: 9pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.editor-toolbar button:hover,
+.file-upload-btn:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.editor-toolbar button:active,
+.file-upload-btn:active {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+.file-upload-btn {
+  display: inline-block;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.save-btn {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 6px 24px;
+  font-size: 10pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.save-btn:active:not(:disabled) {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+.save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 6px 24px;
+  font-size: 10pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.cancel-btn:active {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+.back-btn {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 4px 12px;
+  font-size: 9pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.back-btn:active {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+.editor-header-with-back {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.editor-header-with-back h3 {
+  margin: 0;
+  color: #003399;
+}
+
+.error-message {
+  color: #cc0000;
+  font-size: 9pt;
+  margin: 8px 0;
+}
+
+.editor-message {
+  font-size: 9pt;
+  color: #333;
+  margin: 0;
+}
+
+.submit-btn {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 6px 20px;
+  font-size: 9pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.submit-btn:active {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+/*
+========================================
+Posts List
+========================================
+*/
+.posts-list-section {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.posts-grouped {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.posts-month-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.posts-month-header {
+  background-color: #ffcc99;
+  color: #FF6600;
+  font-size: 10pt;
+  font-weight: bold;
+  padding: 8px 12px;
+  margin: 0;
+  border: 1px solid #FF6600;
+  border-bottom: none;
+}
+
+.posts-month-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #FF6600;
+  border-top: none;
+  padding: 0;
+}
+
+.posts-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 9pt;
+}
+
+.posts-row:last-child {
+  border-bottom: none;
+}
+
+.post-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-title {
+  font-weight: bold;
+  color: #003399;
+  margin-bottom: 3px;
+  word-break: break-word;
+}
+
+.post-meta {
+  font-size: 9pt;
+  color: #666;
+  display: flex;
+  gap: 12px;
+}
+
+.post-meta span {
+  white-space: nowrap;
+}
+
+.post-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.btn-edit,
+.btn-delete {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 4px 12px;
+  font-size: 9pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.btn-edit:active,
+.btn-delete:active {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+.create-btn {
+  background-color: #ffcc99;
+  border: 1px solid #FF6600;
+  color: #003399;
+  padding: 6px 24px;
+  font-size: 10pt;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+  margin-bottom: 15px;
+}
+
+.create-btn:hover {
+  background-color: #FF6600;
+  color: #ffffff;
+}
+
+.create-btn:active {
+  background-color: #cc5200;
+  color: #ffffff;
+}
+
+.empty-message {
+  font-size: 9pt;
+  color: #666;
+  padding: 15px;
+  text-align: center;
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProfileShell from "../../ProfileShell";
+import BlogPostToggle from "../BlogPostToggle";
 import { getAllPosts, getPost, getPostSlugs } from "@/lib/posts";
 
 export const dynamicParams = false;
@@ -50,15 +51,31 @@ export default async function BlogPost({
           <h2 className="main-section-h2">{post.title}</h2>
         </header>
 
-        <p className="blog-meta">
-          {formatDate(post.date)}
-          {post.category ? ` · ${post.category}` : ""}
-        </p>
+        <BlogPostToggle>
+          <p className="blog-meta">
+            {formatDate(post.date)}
+            {post.category ? ` · ${post.category}` : ""}
+          </p>
 
-        <article
-          className="blog-post-body"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+          <article
+            className="blog-post-body"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
+
+          {post.tags.length > 0 && (
+            <div className="blog-post-tags">
+              {post.tags.map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/blog?tag=${encodeURIComponent(tag)}`}
+                  className="blog-tag"
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          )}
+        </BlogPostToggle>
 
         <nav className="blog-nav">
           {mostRecent.slug !== slug ? (

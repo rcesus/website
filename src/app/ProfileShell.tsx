@@ -6,8 +6,8 @@ import { loadPlaylist } from "@/lib/playlist";
 // Static MySpace chrome shared by the home page and the blog pages:
 // header + the left profile sidebar (always static) + footer, with the
 // right `main` column supplied by `children`.
-export default function ProfileShell({ children }: { children: React.ReactNode }) {
-  const playlist = loadPlaylist();
+export default async function ProfileShell({ children }: { children: React.ReactNode }) {
+  const playlist = await loadPlaylist();
   return (
     <div className="master-container">
 

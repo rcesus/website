@@ -1,15 +1,15 @@
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import path from "node:path";
 import type { Track } from "@/app/MusicPlayer";
 
 // Auto-build the playlist from whatever lives in /public/music.
 // Name your files "Artist - Title.mp3" and they'll be parsed accordingly.
 // Drop a same-named image (e.g. "Artist - Title.jpg") next to it for cover art.
-export function loadPlaylist(): Track[] {
+export async function loadPlaylist(): Promise<Track[]> {
   const dir = path.join(process.cwd(), "public", "music");
   let files: string[];
   try {
-    files = fs.readdirSync(dir);
+    files = await fs.readdir(dir);
   } catch {
     return [];
   }
