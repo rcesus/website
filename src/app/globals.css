@@ -1365,6 +1365,10 @@ Render inside the right `main` column, matching the MySpace section style.
   margin: 0 10px 8px 15px;
 }
 
+html:not([data-blog-article-mode="true"]) .blog-post-container .blog-meta {
+  margin-top: 10px;
+}
+
 .blog-archive {
   list-style: none;
   margin: 0;
@@ -1564,7 +1568,7 @@ Article Mode Toggle
 */
 .article-mode-toggle {
   display: block;
-  margin: 8px 15px 12px;
+  margin: 20px 15px 16px;
   padding: 6px 14px;
   background-color: #ffcc99;
   border: 1px solid #FF6600;
@@ -1583,59 +1587,6 @@ Article Mode Toggle
 .article-mode-toggle:active {
   background-color: #cc5200;
   color: #ffffff;
-}
-
-/* Article mode styling */
-[data-article-mode="true"] .blog-post-body {
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 10pt;
-  line-height: 1.7;
-}
-
-[data-article-mode="true"] .blog-post-body h2 {
-  font-size: 14pt;
-  margin-top: 24px;
-  margin-bottom: 12px;
-  line-height: 1.4;
-}
-
-[data-article-mode="true"] .blog-post-body h3 {
-  font-size: 11pt;
-  margin-top: 18px;
-  margin-bottom: 8px;
-}
-
-[data-article-mode="true"] .blog-post-body p {
-  margin-bottom: 14px;
-}
-
-[data-article-mode="true"] .blog-post-body ul,
-[data-article-mode="true"] .blog-post-body ol {
-  margin-bottom: 14px;
-  padding-left: 28px;
-}
-
-[data-article-mode="true"] .blog-post-body li {
-  margin-bottom: 6px;
-}
-
-[data-article-mode="true"] .blog-post-body .post-quote {
-  margin: 18px 0;
-  padding: 12px 16px;
-  border-left: 5px solid #FF6600;
-  background: #fff6ee;
-}
-
-[data-article-mode="true"] .blog-post-body .post-figure {
-  margin: 16px 0;
-}
-
-[data-article-mode="true"] .blog-meta {
-  margin: 0 0 16px 0;
-  font-size: 9pt;
-  text-align: center;
 }
 
 /* Hide sidebar in article mode */
@@ -1666,6 +1617,16 @@ Article Mode Toggle
 
 [data-blog-article-mode="true"] .blog-post-body {
   margin-bottom: 48px;
+  font-size: 12pt;
+  line-height: 1.7;
+}
+
+[data-blog-article-mode="true"] .blog-post-body h2 {
+  font-size: 16pt;
+}
+
+[data-blog-article-mode="true"] .blog-post-body h3 {
+  font-size: 12.5pt;
 }
 
 [data-blog-article-mode="true"] .blog-nav {
@@ -2230,6 +2191,15 @@ sidebar comes first in the DOM), and grow the interactive chrome to
     padding: 0 6px;
     touch-action: manipulation;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Only the four interactive icons get enlarged for tap targets below, so
+     force uniform row heights and vertically centre each icon — otherwise the
+     decorative rows (Instant Message / Block User, etc.) stay short and the
+     grid reads as misaligned. */
+  .contact-images {
+    grid-auto-rows: 44px;
+    align-items: center;
   }
 
   /* Contact-box action icons (Send Message / Forward, etc.). */

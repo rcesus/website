@@ -52,10 +52,7 @@ export default async function BlogPost({
         </header>
 
         <BlogPostToggle>
-          <p className="blog-meta">
-            {formatDate(post.date)}
-            {post.category ? ` · ${post.category}` : ""}
-          </p>
+          <p className="blog-meta">{formatDate(post.date)}</p>
 
           <article
             className="blog-post-body"

@@ -27,9 +27,7 @@ export default async function ProfileShell({ children }: { children: React.React
           <ul>
             <li><Link href="/">Home</Link></li>
             <li><Link href="/blog">Blog</Link></li>
-            <li><Link href="/resume">Resume</Link></li>
             <li><a href="https://github.com/rcesus" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </nav>
 
