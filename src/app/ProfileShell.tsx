@@ -8,6 +8,9 @@ import { loadPlaylist } from "@/lib/playlist";
 // right `main` column supplied by `children`.
 export default async function ProfileShell({ children }: { children: React.ReactNode }) {
   const playlist = await loadPlaylist();
+  // Last Login stays in-universe on MySpace: today's month/day, year pinned to 2006.
+  const now = new Date();
+  const lastLogin = `${now.getMonth() + 1}/${now.getDate()}/2006`;
   return (
     <div className="master-container">
 
@@ -59,7 +62,7 @@ export default async function ProfileShell({ children }: { children: React.React
 
             <ul className="last-login">
               <li>Last Login:</li>
-              <li>4/22/2006</li>
+              <li>{lastLogin}</li>
             </ul>
 
             <p className="pics-videos">View My: <a href="#"><b>Pics</b></a> | <a href="#"><b>Videos</b></a></p>
