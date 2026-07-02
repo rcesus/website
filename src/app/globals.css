@@ -2254,6 +2254,17 @@ sidebar comes first in the DOM), and grow the interactive chrome to
     touch-action: manipulation;
   }
 
+  /* On the blog pages — both the archive listing and an individual entry,
+     each identified by the .blog-section they render in the main column —
+     the MySpace profile chrome stacked underneath the content reads as
+     clutter on a phone. Drop the whole sidebar and the 2026/MySpace mode
+     toggle so the blog stands on its own. Desktop keeps the full profile
+     (this lives inside the 820px breakpoint). */
+  .page-content-container:has(.blog-section) .profile-sidebar,
+  .page-content-container:has(.blog-section) .article-mode-toggle {
+    display: none;
+  }
+
   /* ---- Blog article overflow containment ---- */
 
   /* Long words / URLs wrap; code blocks and wide media scroll or scale
