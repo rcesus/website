@@ -45,42 +45,42 @@ export default function Home() {
         <div className="friend-pic-container">
           <figure>
             <figcaption><a href="https://en.wikipedia.org/wiki/Tom_Anderson">Tom</a></figcaption>
-            <img src="/pictures/tom-pic.jpg" alt="Tom" />
+            <img src="/pictures/tom-pic.jpg" alt="Tom" loading="lazy" />
           </figure>
 
           <figure>
             <figcaption><a href="#">xX_Ļ£Ah_Xx</a></figcaption>
-            <img src="/pictures/leah.png" alt="leah" />
+            <img src="/pictures/leah.png" alt="leah" loading="lazy" />
           </figure>
 
           <figure>
             <figcaption><a href="#">Jessica Sandford</a></figcaption>
-            <img src="/pictures/jessica.jpg" alt="Jessica Sandford" />
+            <img src="/pictures/jessica.jpg" alt="Jessica Sandford" loading="lazy" />
           </figure>
 
           <figure>
             <figcaption><a href="#">tanner</a></figcaption>
-            <img src="/pictures/tanner.jpg" />
+            <img src="/pictures/tanner.jpg" alt="tanner" loading="lazy" />
           </figure>
 
           <figure>
             <figcaption><a href="https://philliesnation.com">Phillies<br />Nation</a></figcaption>
-            <img src="/pictures/philliesnation.jpg" alt="Phillies Nation" />
+            <img src="/pictures/philliesnation.jpg" alt="Phillies Nation" loading="lazy" />
           </figure>
 
           <figure>
             <figcaption><a href="#">XxnickxX</a></figcaption>
-            <img src="/pictures/nick.JPG" alt="XxnickxX" />
+            <img src="/pictures/nick.JPG" alt="XxnickxX" loading="lazy" />
           </figure>
 
           <figure>
             <figcaption><a href="#">J-e-n-n-i</a></figcaption>
-            <img src="/pictures/jenni.jpg" />
+            <img src="/pictures/jenni.jpg" alt="J-e-n-n-i" loading="lazy" />
           </figure>
 
           <figure>
             <figcaption><a href="#">Elias G</a></figcaption>
-            <img src="/pictures/lou.jpg" alt="Lou" />
+            <img src="/pictures/lou.jpg" alt="Lou" loading="lazy" />
           </figure>
         </div>
 

@@ -2085,3 +2085,114 @@ Posts List
   padding: 15px;
   text-align: center;
 }
+
+/*
+========================================================================
+Mobile layout — single breakpoint (<= 820px)
+
+Everything above this comment is the fixed-width 800px desktop MySpace
+layout and is left untouched. On narrow screens we keep the same retro
+chrome but let it fill the viewport, stack the main content ABOVE the
+profile sidebar (the sidebar comes first in the DOM, so this is done
+with grid-template-areas rather than reordering the markup), and grow
+the interactive chrome to ~44px tap targets.
+========================================================================
+*/
+@media (max-width: 820px) {
+  /* Fluid page shell instead of the fixed 800px card. */
+  .master-container {
+    width: 100%;
+  }
+
+  /* Collapse the two-column grid to one column and place the main
+     content above the profile sidebar. */
+  .page-content-container {
+    grid-template-columns: 1fr;
+    grid-column-gap: 0;
+    grid-template-areas:
+      "main"
+      "sidebar";
+  }
+
+  /* Sidebar fills the width and drops the desktop left indent. */
+  .profile-sidebar {
+    width: auto;
+    margin-left: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Boxes that were pinned to sidebar/desktop widths go fluid. */
+  .contact-box,
+  .myspace-url-box {
+    width: auto;
+  }
+
+  .contact-box {
+    height: auto;
+  }
+
+  .user-network {
+    width: auto;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  /* Friend grid fits as many ~80px columns as the screen allows
+     instead of a fixed 4-wide row that overflows narrow phones. */
+  .friend-pic-container {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-rows: auto;
+  }
+
+  /* Footer links wrap instead of being crushed onto one row. */
+  footer.footer {
+    height: auto;
+    grid-template-rows: auto auto;
+  }
+
+  footer.footer ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 4px;
+  }
+
+  /* ---- ~44px tap targets on interactive chrome ---- */
+
+  /* Top navigation links. */
+  .navbar {
+    height: auto;
+    min-height: 44px;
+  }
+
+  .navbar a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 6px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Contact-box action icons (Send Message / Forward, etc.). */
+  .contact-images img[role="button"] {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+    box-sizing: border-box;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Music-player buttons are already 45px; just make taps feel native
+     and give the seek bar a taller, easier touch area. */
+  button.player {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  progress.amplitude-song-played-progress {
+    height: 12px;
+    touch-action: manipulation;
+  }
+}
