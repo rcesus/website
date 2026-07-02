@@ -59,8 +59,8 @@ export default function Home() {
           </figure>
 
           <figure>
-            <figcaption><a href="#">tanner</a></figcaption>
-            <img src="/pictures/tanner.jpg" alt="tanner" loading="lazy" />
+            <figcaption><a href="https://vasilladelph.bandcamp.com/">vAs_iS_h3r3</a></figcaption>
+            <img src="/pictures/vas.jpg" alt="vas" loading="lazy" />
           </figure>
 
           <figure>
