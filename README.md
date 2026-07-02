@@ -13,9 +13,11 @@ A personal website that recreates the look and feel of a classic MySpace profile
 Features:
 - **Profile page** — "RC is in your extended network", bio, interests, details
 - **Blog** — Markdown-based posts with YAML front matter, auto-sanitized slugs
+- **Admin editor** — Password-protected UI to create/edit/delete posts locally
 - **2026 Mode toggle** — Switch between default and article-style rendering on blog posts
 - **Music player** — Auto-loads MP3s from `/public/music`, collapsible playlist
 - **Contact** — Links to email, social media, and messaging platforms
+- **Analytics** — Vercel Web Analytics for site traffic
 
 ---
 
@@ -24,7 +26,9 @@ Features:
 - [Next.js 16](https://nextjs.org) (App Router)
 - [React 19](https://react.dev)
 - [TypeScript 5](https://www.typescriptlang.org)
+- [Tailwind CSS 4](https://tailwindcss.com)
 - [gray-matter](https://github.com/jonschlinkert/gray-matter) + [marked](https://github.com/markedjs/marked) for blog content
+- [Vercel Web Analytics](https://vercel.com/analytics) for traffic
 
 ---
 
@@ -33,8 +37,8 @@ Features:
 ### 1. Clone & Install
 
 ```bash
-git clone <repo-url>
-cd lolcowie-website
+git clone https://github.com/rcesus/website.git
+cd website
 npm install
 ```
 
@@ -62,9 +66,7 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ## Content Management
 
-### Blog Posts
-
-Posts live in `/content/posts/` as Markdown files:
+Blog posts live in `/content/posts/` as Markdown files with YAML front matter:
 
 ```md
 ---
@@ -79,9 +81,21 @@ draft: false
 Post content here.
 ```
 
-Set `draft: true` to exclude a post from publishing.
+Set `draft: true` to exclude a post from publishing (drafts 404 and are never built, so they're safe to commit).
 
 **Slugs are auto-sanitized:** Spaces become hyphens, special characters are removed, and text is lowercased. A post titled "Test Slug With Spaces & Special!" becomes `test-slug-with-spaces-special`.
+
+There are two ways to manage posts:
+
+### Option A — Admin editor (local only)
+
+The admin dashboard at [`/admin`](http://localhost:3000/admin) (login with `ADMIN_PASSWORD`) has a UI to create, edit, and delete posts at `/admin/editor`. It writes directly to `/content/posts/`.
+
+> **This only works when running locally.** Vercel's production filesystem is read-only, so saving from the admin editor on the live site fails with a "read-only filesystem" error. Use the admin editor on your machine, then commit the generated `.md` files to git (see Option B) to publish.
+
+### Option B — Edit Markdown directly
+
+Create or edit `.md` files in `/content/posts/` by hand, then commit and push. The next deploy builds them into the live site. This is the path that actually publishes to production.
 
 ### Music Playlist
 
@@ -99,16 +113,14 @@ Add to `/public/pictures/`:
 
 ### Customization
 
-Edit `src/app/ProfileShell.tsx` to update:
-- Profile info (age, location, interests, bio, schools)
-- GitHub link (line 31)
-- Personal quote (line 52)
+- **`src/app/page.tsx`** — bio ("About me"), interests ("Who I'd like to meet"), and the friends grid
+- **`src/app/ProfileShell.tsx`** — sidebar: profile picture, age/location, personal quote, "Last Login", and the top-nav GitHub link (shared chrome across all pages)
 
 ---
 
-## Deployment to Vercel
+## Deployment
 
-### Step 1: Push to GitHub
+Hosted on Vercel with auto-deploy: every push to `main` triggers a production build. Just commit and push.
 
 ```bash
 git add .
@@ -116,39 +128,7 @@ git commit -m "Your changes"
 git push origin main
 ```
 
-(`.env.local` is already in `.gitignore` — won't be pushed)
-
-### Step 2: Deploy
-
-1. Go to https://vercel.com and sign in with GitHub
-2. Click **"Add New"** → **"Project"**
-3. Select your `lolcowie-website` repo
-4. Vercel auto-detects Next.js — click **"Deploy"**
-5. Wait ~2 minutes for build to complete
-
-### Step 3: Set Environment Variables
-
-1. Go to your Vercel project **Settings** → **"Environment Variables"**
-2. Add a new variable:
-   - **Name:** `ADMIN_PASSWORD`
-   - **Value:** your-secure-password
-   - **Environments:** Production, Preview, Development
-3. Click **"Save"**
-
-### Step 4: Redeploy
-
-1. Go to **Deployments** tab
-2. Click the three-dot menu on the latest deployment
-3. Select **"Redeploy"**
-
-Your site is now live at `your-project.vercel.app`
-
-### Custom Domain (Optional)
-
-1. In Vercel project settings → **Domains**
-2. Add your domain
-3. Update your domain registrar's DNS to point to Vercel
-4. Vercel auto-generates HTTPS certificate
+**Environment variables:** `ADMIN_PASSWORD` must be set in the Vercel project settings (**Settings → Environment Variables**) — `.env.local` is gitignored and never pushed. Changing it takes effect on the next deploy.
 
 ---
 
