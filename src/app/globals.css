@@ -2092,10 +2092,10 @@ Mobile layout — single breakpoint (<= 820px)
 
 Everything above this comment is the fixed-width 800px desktop MySpace
 layout and is left untouched. On narrow screens we keep the same retro
-chrome but let it fill the viewport, stack the main content ABOVE the
-profile sidebar (the sidebar comes first in the DOM, so this is done
-with grid-template-areas rather than reordering the markup), and grow
-the interactive chrome to ~44px tap targets.
+chrome but let it fill the viewport, collapse the two columns into one
+in source order (profile sidebar first, then the main content — the
+sidebar comes first in the DOM), and grow the interactive chrome to
+~44px tap targets.
 ========================================================================
 */
 @media (max-width: 820px) {
@@ -2111,18 +2111,18 @@ the interactive chrome to ~44px tap targets.
     overflow-x: hidden;
   }
 
-  /* Collapse the two-column grid to one column and place the main
-     content above the profile sidebar. minmax(0, 1fr) (not the default
-     1fr = minmax(auto, 1fr)) lets the track shrink below a rigid child's
-     min-content width; min-width: 0 on the grid items does the same for
-     their own contents, so a wide child scrolls internally instead of
-     stretching the page. */
+  /* Collapse the two-column grid to one column, keeping source order:
+     the profile sidebar first, then the main content. minmax(0, 1fr)
+     (not the default 1fr = minmax(auto, 1fr)) lets the track shrink
+     below a rigid child's min-content width; min-width: 0 on the grid
+     items does the same for their own contents, so a wide child scrolls
+     internally instead of stretching the page. */
   .page-content-container {
     grid-template-columns: minmax(0, 1fr);
     grid-column-gap: 0;
     grid-template-areas:
-      "main"
-      "sidebar";
+      "sidebar"
+      "main";
   }
 
   .page-content-container > main,
@@ -2159,6 +2159,14 @@ the interactive chrome to ~44px tap targets.
   .friend-pic-container {
     grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     grid-template-rows: auto;
+    gap: 14px 8px;
+  }
+
+  /* Cap each portrait to its grid cell. The desktop rule pins images to
+     max-width: 100px, which overflows the ~80-90px mobile cells and makes
+     neighbouring portraits collide; 100% keeps them inside their track. */
+  .friend-pic-container img {
+    max-width: 100%;
   }
 
   /* Footer links wrap instead of being crushed onto one row. */
