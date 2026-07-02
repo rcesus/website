@@ -3,13 +3,14 @@
 import { useState } from "react";
 
 // Interactive contact icons for the profile sidebar. Two icons do something:
-//  - "Send Message" opens a chooser that forces a specific mail provider's
-//    pre-filled compose window (Gmail / Outlook web), plus a default-mail-app
-//    option (mailto:) which covers Apple Mail / Outlook desktop / etc.
+//  - "Send Message" on mobile opens the OS default mail app directly via
+//    mailto: (Mail on iOS, Gmail on Android); on desktop it opens a chooser
+//    for a specific provider's pre-filled compose window (Gmail / Outlook web),
+//    plus a default-mail-app option (mailto:) for Apple Mail / Outlook desktop.
 //  - "Forward to a Friend" opens the native share sheet on mobile via the Web
 //    Share API, falling back to copying the page link where it's unsupported.
-const TO = "rc@payabli.com";
-const SUBJECT = "Hello from your site";
+const TO = "robertccowie@gmail.com";
+const SUBJECT = "Wanted To Get In Touch!";
 const BODY = "Hi RC,\n\n";
 
 function openCompose(provider: "gmail" | "outlook" | "default") {
@@ -92,6 +93,19 @@ async function forwardToFriend() {
 export default function ContactIcons() {
   const [mailMenuOpen, setMailMenuOpen] = useState(false);
 
+  // On mobile, skip the provider chooser and go straight to the OS default
+  // mail app via mailto: (Mail on iOS, Gmail on Android). The chooser menu is
+  // a plain toggle that can't be dismissed by tapping away, which is a poor
+  // touch experience — so we only show it on desktop.
+  function handleSendMessage() {
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    if (isMobile) {
+      openCompose("default");
+      return;
+    }
+    setMailMenuOpen((o) => !o);
+  }
+
   return (
     <figure className="contact-images">
       <span className="contact-icon-wrap">
@@ -100,9 +114,9 @@ export default function ContactIcons() {
           alt="Send Message"
           role="button"
           tabIndex={0}
-          onClick={() => setMailMenuOpen((o) => !o)}
+          onClick={handleSendMessage}
           onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") setMailMenuOpen((o) => !o);
+            if (e.key === "Enter" || e.key === " ") handleSendMessage();
           }}
         />
         {mailMenuOpen && (
