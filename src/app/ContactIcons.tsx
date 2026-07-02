@@ -10,7 +10,7 @@ import { useState } from "react";
 //  - "Forward to a Friend" opens the native share sheet on mobile via the Web
 //    Share API, falling back to copying the page link where it's unsupported.
 //  - "Add to Friends" opens RC's LinkedIn profile so the visitor can Connect.
-const TO = "robertccowie@gmail.com";
+const TO = "rccowie@protonmail.com";
 const SUBJECT = "Wanted To Get In Touch!";
 const BODY = "Hi RC,\n\n";
 
