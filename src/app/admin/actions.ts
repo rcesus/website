@@ -68,7 +68,30 @@ export async function savePost(data: PostData, slug: string) {
   const markdown = `${frontmatter}\n\n${data.content}`;
   const filePath = path.join(postsDir, `${slug}.md`);
 
-  await fs.writeFile(filePath, markdown, 'utf-8');
+  // NOTE: this writes to the local filesystem, which only works in `next dev`.
+  // On Vercel (and most serverless hosts) the runtime filesystem is read-only,
+  // so writeFile throws EROFS. We catch that and return a readable message
+  // instead of throwing — thrown errors get sanitized to a generic digest in
+  // production, which is what made this failure so cryptic. Returned values are
+  // not sanitized, so the editor can show the real reason.
+  try {
+    await fs.writeFile(filePath, markdown, 'utf-8');
+    return { ok: true as const };
+  } catch (err) {
+    const code = (err as NodeJS.ErrnoException)?.code;
+    if (code === 'EROFS') {
+      return {
+        ok: false as const,
+        error:
+          "Can't save from the live site — this deployment has a read-only filesystem. " +
+          'Edit posts locally (npm run dev → /admin), then commit and push to publish.',
+      };
+    }
+    return {
+      ok: false as const,
+      error: err instanceof Error ? err.message : 'Unknown error writing post file',
+    };
+  }
 }
 
 export async function listPosts() {

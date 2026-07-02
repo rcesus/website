@@ -44,13 +44,17 @@ export default function AdminEditorContent() {
   }, [router]);
 
   const handleSave = async (data: PostData, slug: string) => {
+    let result;
     try {
-      await savePost(data, slug);
-      setViewMode('list');
-      setEditingPost(null);
+      result = await savePost(data, slug);
     } catch (error) {
       throw new Error(`Failed to save post: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
+    if (!result.ok) {
+      throw new Error(result.error);
+    }
+    setViewMode('list');
+    setEditingPost(null);
   };
 
   const handleEditPost = (slug: string, data: PostData) => {
