@@ -2104,14 +2104,30 @@ the interactive chrome to ~44px tap targets.
     width: 100%;
   }
 
+  /* Belt-and-suspenders: never let any descendant force the page
+     wider than the viewport (the cause of the sideways pan / edge clip). */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
   /* Collapse the two-column grid to one column and place the main
-     content above the profile sidebar. */
+     content above the profile sidebar. minmax(0, 1fr) (not the default
+     1fr = minmax(auto, 1fr)) lets the track shrink below a rigid child's
+     min-content width; min-width: 0 on the grid items does the same for
+     their own contents, so a wide child scrolls internally instead of
+     stretching the page. */
   .page-content-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-column-gap: 0;
     grid-template-areas:
       "main"
       "sidebar";
+  }
+
+  .page-content-container > main,
+  .profile-sidebar {
+    min-width: 0;
   }
 
   /* Sidebar fills the width and drops the desktop left indent. */
@@ -2194,5 +2210,32 @@ the interactive chrome to ~44px tap targets.
   progress.amplitude-song-played-progress {
     height: 12px;
     touch-action: manipulation;
+  }
+
+  /* ---- Blog article overflow containment ---- */
+
+  /* Long words / URLs wrap; code blocks and wide media scroll or scale
+     within the column instead of widening it. */
+  .blog-post-body {
+    overflow-wrap: break-word;
+  }
+
+  .blog-post-body pre {
+    overflow-x: auto;
+  }
+
+  .blog-post-body img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Prev / index / next links wrap onto multiple rows on narrow
+     screens rather than forcing a single row wider than the viewport. */
+  .blog-nav {
+    flex-wrap: wrap;
+  }
+
+  .blog-nav span {
+    min-width: 0;
   }
 }
