@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { ArticleModeProvider } from "./ArticleModeProvider";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ArticleModeProvider>{children}</ArticleModeProvider>
+        <Analytics />
       </body>
     </html>
   );
