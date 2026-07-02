@@ -1,10 +1,11 @@
 ---
 title: The Verification Tax
-date: 2026-07-01
-excerpt: "The Verification Tax argues that AI tools make teams faster while quietly eroding the expertise those teams need to catch what the tools get wrong The core problem is that verification work is invisible, a checked answer and a lucky unchecked one look identical in the final output, so this erosion is the default outcome unless teams design against it. The fix requires two things together: training people's judgment through deliberate friction, and building real checks into the work itself (source grounding, refusal thresholds, mandatory review before anything ships) rather than relying on individual attention, which is exactly what erodes over time. Stripe is held up as the case study, with every AI-written pull request reviewed by a person before it merges into their payments systems, and the piece closes by framing the verification tax as a decision every team is already making, whether or not they've given it such a cool name like me."
+date: 2026-07-02
+excerpt: "The Verification Tax argues that AI make teams faster while eroding the expertise those teams need to catch what AI get wrong. The core problem is that verification work is invisible, a checked answer and a lucky unchecked one look identical in the final output, so this erosion is the outcome unless teams design against it. The fix requires two things together: training people's judgment through deliberate friction, and building real checks into the work itself (source grounding, refusal thresholds, mandatory review before anything ships) rather than relying on individual attention, which is exactly what erodes over time. By framing The Verification Tax as a decision every team is already making, the question stops being whether to use AI and becomes whether you've built the checks to catch what it gets wrong."
 category: AI, Solutions
 tags: ["AI", "Solutioning"]
 ---
+
 
 
 # The Verification Tax
@@ -57,9 +58,7 @@ One honest mention here, because I'd rather you trust the argument than have me 
 
 ## The choice you're already making
 
-Using these tools is settled. That decision is behind us. The only choice left is whether you design the work so the people using them keep the judgment the tools depend on, or whether you let it ride.
-
-The real choice is what checks you build into the work, and that decides whether your team's expertise compounds with the work, or collapses along with the people who used to know how to do it.
+Using AI at work is already settled. What's not is whether you build the checks in  and that decides whether your team's expertise compounds or leaves with the people who had it.
 
 Leaders are making this call right now, most of them without even realizing it.
 ---
