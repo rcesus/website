@@ -9,6 +9,7 @@ import { useState } from "react";
 //    plus a default-mail-app option (mailto:) for Apple Mail / Outlook desktop.
 //  - "Forward to a Friend" opens the native share sheet on mobile via the Web
 //    Share API, falling back to copying the page link where it's unsupported.
+//  - "Add to Friends" opens RC's LinkedIn profile so the visitor can Connect.
 const TO = "robertccowie@gmail.com";
 const SUBJECT = "Wanted To Get In Touch!";
 const BODY = "Hi RC,\n\n";
@@ -65,6 +66,17 @@ async function addToFavorites() {
   const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
   const shortcut = isMac ? "⌘ + D" : "Ctrl + D";
   alert(`Press ${shortcut} to bookmark this page.`);
+}
+
+function openLinkedIn() {
+  // "Add to Friends" opens RC's LinkedIn profile (the LinkedIn app on mobile if
+  // installed) so the visitor can tap Connect there. A site can't send a
+  // connection request programmatically — LinkedIn's API doesn't allow it.
+  window.open(
+    "https://www.linkedin.com/in/rccowie/",
+    "_blank",
+    "noopener,noreferrer",
+  );
 }
 
 async function forwardToFriend() {
@@ -138,7 +150,16 @@ export default function ContactIcons() {
           if (e.key === "Enter" || e.key === " ") forwardToFriend();
         }}
       />
-      <img src="/pictures/addFriendIcon.gif" alt="Add to Friends" />
+      <img
+        src="/pictures/addFriendIcon.gif"
+        alt="Add to Friends"
+        role="button"
+        tabIndex={0}
+        onClick={openLinkedIn}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") openLinkedIn();
+        }}
+      />
       <img
         src="/pictures/addFavoritesIcon.gif"
         alt="Add to Favorites"
