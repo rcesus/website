@@ -2111,31 +2111,64 @@ sidebar comes first in the DOM), and grow the interactive chrome to
     overflow-x: hidden;
   }
 
-  /* Collapse the two-column grid to one column, keeping source order:
-     the profile sidebar first, then the main content. minmax(0, 1fr)
-     (not the default 1fr = minmax(auto, 1fr)) lets the track shrink
-     below a rigid child's min-content width; min-width: 0 on the grid
-     items does the same for their own contents, so a wide child scrolls
-     internally instead of stretching the page. */
-  .page-content-container {
-    grid-template-columns: minmax(0, 1fr);
-    grid-column-gap: 0;
-    grid-template-areas:
-      "sidebar"
-      "main";
+  /* Flatten the two-column layout into a single reorderable stream.
+     `display: contents` drops the .profile-sidebar and <main> wrapper
+     boxes (neither carries a background or border, so this is visually
+     lossless) and promotes their children to be direct flex items of
+     .page-content-container. That lets sidebar boxes and main-column
+     sections interleave in one `order` sequence below.
+
+     Guarded with html:not([data-blog-article-mode="true"]) so blog
+     article pages — which hide the sidebar and style <main> as the full
+     article column — keep their own layout untouched. */
+  html:not([data-blog-article-mode="true"]) .page-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
   }
 
-  .page-content-container > main,
-  .profile-sidebar {
+  html:not([data-blog-article-mode="true"]) .profile-sidebar,
+  html:not([data-blog-article-mode="true"]) main {
+    display: contents;
+  }
+
+  /* Mobile reading order:
+       1 profile identity ("RC" header + picture)
+       2 contact box
+       3 MySpace URL box
+       4 extended-network banner + blog + blurbs (main-column intro)
+       5 friends
+       6 interests / details / schools (sidebar tables, moved to the end)
+     The music player is dropped entirely on mobile. min-width: 0 lets a
+     wide child (friend grid, long blog text) scroll or wrap within its
+     item instead of stretching the page. */
+  .profile-sidebar > header { order: 1; }
+  .profile-picture-container { order: 2; }
+  .contact-box { order: 3; }
+  .myspace-url-box { order: 4; }
+  .user-network { order: 5; }
+  .blog { order: 6; }
+  .blurbs { order: 7; }
+  .friends { order: 8; }
+  .interests { order: 9; }
+  .details { order: 10; }
+  .schools { order: 11; }
+
+  .music-player {
+    display: none;
+  }
+
+  .profile-picture-container,
+  .contact-box,
+  .myspace-url-box,
+  .user-network,
+  .blog,
+  .blurbs,
+  .friends,
+  .interests,
+  .details,
+  .schools {
     min-width: 0;
-  }
-
-  /* Sidebar fills the width and drops the desktop left indent. */
-  .profile-sidebar {
-    width: auto;
-    margin-left: 0;
-    padding-left: 12px;
-    padding-right: 12px;
   }
 
   /* Boxes that were pinned to sidebar/desktop widths go fluid. */
@@ -2148,10 +2181,11 @@ sidebar comes first in the DOM), and grow the interactive chrome to
     height: auto;
   }
 
+  /* The network banner is a fixed-width, auto-centred flex row on desktop;
+     let it fill the column like everything else. */
   .user-network {
     width: auto;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin: 0;
   }
 
   /* Friend grid fits as many ~80px columns as the screen allows
