@@ -32,9 +32,35 @@ function openCompose(provider: "gmail" | "outlook" | "default") {
   }
 }
 
-function addToFavorites() {
-  // No current browser lets a page add a bookmark via JS, so we just tell the
-  // user the right keyboard shortcut for their OS.
+async function addToFavorites() {
+  // No browser lets a page add a bookmark via JS. On mobile the closest
+  // native path is the OS share sheet: iOS Safari surfaces "Add Bookmark" /
+  // "Add to Home Screen" there, and Android exposes the browser's save
+  // options. So on mobile we open that sheet; on desktop we fall back to the
+  // keyboard shortcut, since desktop share sheets don't offer bookmarking.
+  const ua = navigator.userAgent;
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+
+  if (isMobile && navigator.share) {
+    try {
+      await navigator.share({
+        title: document.title,
+        text: "Bookmark RC's page",
+        url: window.location.href,
+      });
+    } catch {
+      // User cancelled the share sheet — nothing to do.
+    }
+    return;
+  }
+
+  if (isMobile) {
+    // Mobile browser without the Web Share API (e.g. some Android browsers):
+    // point the user at the native bookmark control.
+    alert("Open your browser menu and tap ☆ (or “Add bookmark”) to save this page.");
+    return;
+  }
+
   const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
   const shortcut = isMac ? "⌘ + D" : "Ctrl + D";
   alert(`Press ${shortcut} to bookmark this page.`);
